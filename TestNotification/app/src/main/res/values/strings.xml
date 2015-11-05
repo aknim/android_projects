@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">TestNotification</string>
-
-    <string name="hello_world">Hi, I am the main acitivity, and I call the notification</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_post_notification">PostNotificationActivity</string>
-    <string name="TheNotification">Hi I am the notification activity</string>
-</resources>
