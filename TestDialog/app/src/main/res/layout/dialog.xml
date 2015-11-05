@@ -7,10 +7,11 @@ android:orientation="horizontal">
     android:text="This is the dialog box"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" />
-<NumberPicker
-    android:id="@+id/frequencyPicker"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-</NumberPicker>
+
+    <Button
+        android:id="@+id/dialogOK"
+        android:text = "OK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

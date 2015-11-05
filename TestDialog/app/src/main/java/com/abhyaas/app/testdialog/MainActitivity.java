@@ -39,9 +39,21 @@ public class MainActitivity extends ActionBarActivity {
                     }
                 });
 
+
+                //This won't work, need to access by dialog.findViewById
+                //Button dialogButton = (Button)(findViewById(R.id.dialogOK));
+                Button dialogButton = (Button)(dialog.findViewById(R.id.dialogOK));
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast toast = Toast.makeText(getBaseContext(), "Dialog's ok button clicked, via dialog.findViewById", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
                 dialog.show();
             }
         });
+
     }
 
     @Override
