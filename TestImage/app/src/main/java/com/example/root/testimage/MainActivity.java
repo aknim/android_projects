@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String selectedImagePath;
     private ImageView image;
+    public enum cases {FROMURI, FROMSTRINGURI, FROMPATH};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +40,29 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        cases differentCase = cases.FROMURI;
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 Uri selectedImageUri = data.getData();
-                selectedImagePath = getPath(selectedImageUri);
-                Log.d("image",selectedImagePath);
-                String toPrint = selectedImageUri.toString();
-                Log.d("image", (toPrint==null)?"null":toPrint);
-                //image.setImageURI(selectedImageUri);
-                Bitmap bmImg = BitmapFactory.decodeFile("/mnt/sdcard/Download/images.jpeg");
-                image.setImageBitmap(bmImg);
+                switch (differentCase){
+                    case FROMPATH ://working on API16, 15(small image), 10(small image)
+                        //won't work for lollipop as in it getPath returns null
+                        selectedImagePath = getPath(selectedImageUri);
+                        Log.d("image path:", selectedImagePath);
+                        Bitmap bmImg = BitmapFactory.decodeFile(selectedImagePath);
+                        image.setImageBitmap(bmImg);
+                        break;
+                    case FROMSTRINGURI://tested on Nexus(img/print), API16, 15(small image), 10(small image)
+                        String stringUri = selectedImageUri.toString();
+                        Log.d("image stringuri:", stringUri);
+                        image.setImageURI(Uri.parse(stringUri));
+                        break;
+                    case FROMURI://tested on lollypop(img/print), API16, 15(small image), 10(small image)
+                        Log.d("image imageuri:",""+ selectedImageUri);
+                        image.setImageURI(selectedImageUri);
+                        break;
+                }
+
             }
         }
     }
