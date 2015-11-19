@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             if (requestCode == 1) {
                 Uri selectedImageUri = data.getData();
                 sendIntent.putExtra(Intent.EXTRA_STREAM, selectedImageUri);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,"The caption");
                 sendIntent.setType("image/*");
                 mShareActionProvider.setShareIntent(sendIntent);
             }
