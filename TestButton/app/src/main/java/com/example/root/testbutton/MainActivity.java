@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
+
+        
         text = (EditText)(findViewById(R.id.text));
         edit = (FloatingActionButton)(findViewById(R.id.edit));
         text.setEnabled(false);
