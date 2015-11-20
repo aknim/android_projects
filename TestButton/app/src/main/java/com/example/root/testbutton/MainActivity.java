@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViews() {
         text = (EditText)(findViewById(R.id.text));
         edit = (FloatingActionButton)(findViewById(R.id.edit));
-        edit.setEnabled(false);
+        text.setEnabled(false);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
