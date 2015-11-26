@@ -18,14 +18,15 @@ public class MainActivity extends AppCompatActivity {
     private void setView(){
         final TextView tv = (TextView)findViewById(R.id.tv);
         SeekBar seekBar = (SeekBar)findViewById(R.id.sb);
+        seekBar.setMax(60*24-1);//
 
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progress = 0;
+            int value = 1;
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
-                progress = progresValue;
+                value = progresValue+1;
                 Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
             }
 
@@ -36,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                tv.setText("Covered: " + progress + "/" + seekBar.getMax());
+                int numOfHours = value/60;
+                int numOfMinutes = value % 60;
+                tv.setText("Hours: "+numOfHours+ " Minutes: "+numOfMinutes+" Value: "+value);
                 Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
             }
         });
