@@ -1,11 +1,13 @@
 package com.example.root.testgesture;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SecondActivity extends Activity {
@@ -16,9 +18,11 @@ public class SecondActivity extends Activity {
             super.onCreate(savedInstanceState);
             gestureDetector = new GestureDetector(
                     new SwipeGestureDetector());
+
+            setContentView(R.layout.activity_main);
         }
 
-  /* ... */
+
 
         @Override
         public boolean onTouchEvent(MotionEvent event) {
@@ -31,11 +35,21 @@ public class SecondActivity extends Activity {
         private void onLeftSwipe() {
             // Do something
             Log.d("swipe", "left");
+            Intent intent = new Intent(
+                    SecondActivity.this, SecondActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.animator.slide_left_in, R.animator.slide_left_out);
+            finish();
         }
 
         private void onRightSwipe() {
             // Do something
             Log.d("swipe", "right");
+            Intent intent = new Intent(
+                    SecondActivity.this, SecondActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.animator.slide_right_in, R.animator.slide_right_out);
+            finish();
         }
 
         // Private class for gestures
